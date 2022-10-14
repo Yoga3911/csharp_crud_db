@@ -86,6 +86,7 @@ class UserManager
             Console.WriteLine($"ID: {user.Id} -- Username: {user.Username}");
         }
     }
+
     public void GetUserById(int id)
     {
         ds = new DataSet();
@@ -115,6 +116,7 @@ class UserManager
             Console.WriteLine($"ID: {user.Id} -- Username: {user.Username}");
         }
     }
+
     public void InsertUser(User user)
     {
         ds = new DataSet();
@@ -127,6 +129,7 @@ class UserManager
         query = "INSERT INTO users VALUES (@id, @username);";
         helper.DBConn(ref ds, query, param);
     }
+
     public void UpdateUser(User user)
     {            
         ds = new DataSet();
@@ -139,6 +142,7 @@ class UserManager
         helper.DBConn(ref ds, query, param);
         
     }
+
     public void DeleteUser(int id)
     {
         ds = new DataSet();
