@@ -12,20 +12,16 @@ class Program
         userManager.GetAllUsers();
 
         // Get User by Id
-        //userManager.GetUserById(2);
+        userManager.GetUserById(2);
 
         // Insert User
-        //userManager.InsertUser(new User
-        //{
-        //    Id=6,
-        //    Username="Hehe"
-        //});
+        userManager.InsertUser(new User { Id = 8, Username = "Hehe123" });
 
         // Update User
-        //userManager.UpdateUser(new User { Id = 2 , Username = "Loki"});
-        
+        userManager.UpdateUser(new User { Id = 2, Username = "Loki Baru" });
+
         // Delete User
-        //userManager.DeleteUser(5);
+        userManager.DeleteUser(8);
     }
 }
 
@@ -65,7 +61,7 @@ class UserManager
         // Query Select
         query = "SELECT * FROM users;";
         // Panggil DBConn untuk eksekusi Query
-        helper.DBConn(ds, query, param);
+        helper.DBConn(ref ds, query, param);
 
         // List of User untuk menampung data user
         List<User> users = new List<User>();
@@ -99,7 +95,7 @@ class UserManager
         };
 
         query = "SELECT * FROM users WHERE id = @id;";
-        helper.DBConn(ds, query, param);
+        helper.DBConn(ref ds, query, param);
 
 
         List<User> users = new List<User>();
@@ -129,7 +125,7 @@ class UserManager
         };
 
         query = "INSERT INTO users VALUES (@id, @username);";
-        helper.DBConn(ds, query, param);
+        helper.DBConn(ref ds, query, param);
     }
     public void UpdateUser(User user)
     {            
@@ -140,7 +136,7 @@ class UserManager
         };
 
         query = "UPDATE users SET username = @username WHERE id = @id;";
-        helper.DBConn(ds, query, param);
+        helper.DBConn(ref ds, query, param);
         
     }
     public void DeleteUser(int id)
@@ -151,17 +147,17 @@ class UserManager
         };
 
         query = "DELETE FROM users WHERE id = @id;";
-        helper.DBConn(ds, query, param);
+        helper.DBConn(ref ds, query, param);
     }
 }
 
 // Helper untuk koneksi ke DB
 class Helper
 {
-    public void DBConn(DataSet ds, string query, NpgsqlParameter[] param)
+    public void DBConn(ref DataSet ds, string query, NpgsqlParameter[] param)
     {
         // Data Source Name berisi credential dari database
-        string dsn = "Host=localhost;Username=postgres;Password=123456;Database=coba";
+        string dsn = "Host=localhost;Username=postgres;Password=123456;Database=coba;Port=54321";
         // Membuat koneksi ke db
         var conn = new NpgsqlConnection(dsn);
         // Command untuk eksekusi query
